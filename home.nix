@@ -1,0 +1,1 @@
+/home/jg/.config/home-manager/home.nix
