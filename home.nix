@@ -46,10 +46,10 @@
   # plain files is through 'home.file'.
   home.file = {
     ".tmux.conf" = {
-        source = /home/jg/dotfiles/sources/tmux.conf;
+        source = ./sources/tmux.conf;
       };
     ".gitconfig" = {
-        source = /home/jg/dotfiles/sources/gitconfig;
+        source = ./sources/gitconfig;
       };
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -86,7 +86,7 @@
   # Config Bash
   programs.bash = {
     enable = true;
-    initExtra = builtins.readFile /home/jg/dotfiles/sources/bashrc;
+    initExtra = builtins.readFile ./sources/bashrc;
   };
 
   # Let Home Manager install and manage itself.
