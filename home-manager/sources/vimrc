@@ -81,7 +81,7 @@ set clipboard=unnamedplus
 
 " --------------------------------------------------------
 " Color scheme :)
-"colorscheme jg_meh
+colorscheme meh
 
 
 

@@ -15,8 +15,10 @@
 
   home.packages = [
     pkgs.cowsay
-    pkgs.tmux
     pkgs.lolcat
+
+    # Dev packages
+    pkgs.tmux
     pkgs.go
     pkgs.rustc
     pkgs.tree
@@ -37,6 +39,14 @@
       source = ./sources/vim;
       recursive = true;
     };
+    ".config/nvim" = {
+      source = ./sources/nvim;
+      recursive = true;
+    };
+    ".config/nvim/colors" = {
+      source = ./sources/vim/colors;
+      recursive = true;
+    };
     ".tmux.conf" = {
       source = ./sources/tmux.conf;
     };
@@ -51,6 +61,12 @@
     extraConfig = builtins.readFile ./sources/vimrc;
   };
 
+  # Config neovim
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   # Config Bash
   programs.bash = {
