@@ -23,6 +23,7 @@
     pkgs.rustc
     pkgs.tree
     pkgs.xclip
+    pkgs.presenterm
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
