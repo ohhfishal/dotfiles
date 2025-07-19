@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "jg";
-  home.homeDirectory = "/home/jg";
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -12,6 +9,9 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  home.username = "jg";
+  home.homeDirectory = "/home/jg";
 
   home.packages = [
     pkgs.cowsay
@@ -26,12 +26,6 @@
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
     '')
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
   ];
 
   home.file = {
@@ -39,8 +33,8 @@
       source = ./sources/vim;
       recursive = true;
     };
-    ".config/nvim" = {
-      source = ./sources/nvim;
+    ".config" = {
+      source = ./sources/config;
       recursive = true;
     };
     ".config/nvim/colors" = {
@@ -72,6 +66,14 @@
   programs.bash = {
     enable = true;
     initExtra = builtins.readFile ./sources/bashrc;
+  };
+
+  # Set shell agnostic aliases
+  home.shellAliases = {
+    l = "ls -l";
+    g = "git";
+    gs = "git status";
+    gd = "git diff";
   };
 
   # Set envs
