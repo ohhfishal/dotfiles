@@ -93,6 +93,8 @@ alias l='ls -CF'
 
 # alias
 alias clip='xclip -selection clipboard'
+alias ..='cd ..'
+alias ...='cd ../..'
 
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/bin"
