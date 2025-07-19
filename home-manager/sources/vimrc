@@ -1,0 +1,197 @@
+
+" Pathogen load
+"filetype off
+
+"call pathogen#infect()
+"call pathogen#helptags()
+
+ filetype plugin indent on
+ syntax on
+
+
+" Keep a backup file
+set backup
+" Reread a file that changes
+set autoread
+au CursorHold * checktime  
+" Recursive find files
+set path+=**
+" Show all matches when tab complete
+set wildmenu
+
+" Save swp files in one place
+set directory=$HOME/.vim/swapfiles//
+
+
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+" from SJCO
+set backspace=indent,eol,start
+
+set nobackup
+set scrolloff=10
+
+set ignorecase
+set smartcase
+set showmatch
+
+" From sat
+set gdefault   " Imply 'g' on the end of search since it's always what I want
+
+" I am trying this out
+set cursorline
+set cursorcolumn
+
+
+" Nagivate wrapped lines as normal lines
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
+
+set mouse=a
+
+" Auto completion
+set wildmenu
+set wildmode=list:longest
+set wildignore=*.dox,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe
+
+" Have absolute number for current line and relative for others
+set number
+set relativenumber
+
+" Set cursorline whenever we are in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+
+set showcmd
+
+" 'Jay you should probably move to a new line' markers
+set colorcolumn=80,88
+
+" Wrap if a line is too long
+set wrap linebreak nolist
+set columns=90
+
+set foldmethod=manual
+
+set clipboard=unnamedplus
+
+
+" --------------------------------------------------------
+" Color scheme :)
+"colorscheme jg_meh
+
+
+
+" Shortcuts / keybinds :)
+let mapleader=" "
+
+
+noremap <Tab> :bnext<CR>
+noremap <S-Tab> :bprev<CR>
+
+" Remove w from the control [MOTION] navigation between windows
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
+" Ideas from jfg
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>e :e<Space>
+nnoremap <Leader>rc :e $MYVIMRC<CR>
+nnoremap <Leader>r :!"%:p"<CR>
+
+" Go to buffer
+nnoremap gb :ls<CR>:buffer<Space>
+nnoremap gB :ls!<CR>:buffer<Space>
+" Delete current buffer
+nnoremap <Leader>d :bd<CR>
+
+inoremap jj <Esc>
+cnoremap jj <C-c>
+
+" toggle fold
+noremap <Leader><space> za
+
+
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+
+" Clear search highlighting with enter in normal mode
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Draw a box of # around text
+nnoremap <leader># I#<space><esc>A<space>#<esc>yy2P<C-V>$r#2j.
+
+" Create a comment. Tried using vim-commentary but settled on python only lol
+nnoremap <leader>t o#TODO: 
+
+" Raise a not implemented error in python
+nnoremap <leader>i oraise NotImplementedError("")<ESC>hi
+
+nnoremap <leader>s :s/
+nnoremap <leader>S :%s/
+
+" Easy shortcut to add in date from osr
+map <leader>D :put =strftime('**%a %m/%d/%y**')<CR>
+
+" Boilerplate code
+nnoremap <leader>py :-1read $HOME/.vim/.templates/template.py<CR>
+
+" Plugin stuff
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='minimalist'
+
+" ALE
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Change how warnings/errors appear in gutter
+let g:ale_sign_warning = '⚠️'
+highlight clear ALEWarningSign
+let g:ale_sign_error = '❌'
+highlight clear ALEErrorSign
+
+let g:ale_linters = {'python': ['mypy', 'black', 'pylint']}
+
+
+
+" Nerd tree : https://vimawesome.com/plugin/nerdtree-red
+nnoremap <leader>E :NERDTreeToggle<CR>
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+"CtrlP
+" Fuzzy finder
+nnoremap <leader>ff :CtrlP<CR>
+
+" Airline
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_close_button=0
+
