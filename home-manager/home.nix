@@ -24,6 +24,8 @@
     pkgs.tree
     pkgs.xclip
     pkgs.presenterm
+    pkgs.zip
+    pkgs.unzip
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
@@ -76,6 +78,7 @@
     g = "git";
     gs = "git status";
     gd = "git diff";
+    config = "cd $HOME/config";
   };
 
   # Set envs
