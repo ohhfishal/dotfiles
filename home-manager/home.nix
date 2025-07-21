@@ -32,6 +32,7 @@
     '')
   ];
 
+  # Link config files to the right place
   home.file = {
     ".vim" = {
       source = ./sources/vim;
@@ -44,9 +45,6 @@
     ".config/nvim/colors" = {
       source = ./sources/vim/colors;
       recursive = true;
-    };
-    ".tmux.conf" = {
-      source = ./sources/tmux.conf;
     };
     ".gitconfig" = {
       source = ./sources/gitconfig;
@@ -64,6 +62,12 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+  };
+
+  # Config tmux
+  programs.tmux = {
+    enable = true;
+    extraConfig = builtins.readFile ./sources/tmux.conf;
   };
 
   # Config Bash
