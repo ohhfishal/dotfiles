@@ -26,6 +26,7 @@
     pkgs.presenterm
     pkgs.zip
     pkgs.unzip
+    pkgs.ripgrep
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
@@ -82,7 +83,7 @@
     g = "git";
     gs = "git status";
     gd = "git diff";
-    config = "cd $HOME/config";
+    config = "pushd $HOME/config";
   };
 
   # Set envs
