@@ -98,6 +98,7 @@ alias ...='cd ../..'
 alias c='clear'
 alias reset='source $HOME/.bashrc'
 
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/bin"
 export GOTIME_LOG="$HOME/.config/gotime.log"

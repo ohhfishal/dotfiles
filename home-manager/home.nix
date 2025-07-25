@@ -27,6 +27,8 @@
     pkgs.zip
     pkgs.unzip
     pkgs.ripgrep
+    pkgs.gnumake
+    pkgs.gcc
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
