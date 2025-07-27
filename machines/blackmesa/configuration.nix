@@ -89,6 +89,12 @@
     ];
   };
 
+  users.users.ohhfishal = {
+    isNormalUser = true;
+    description = "ohhfishal";
+    extraGroups = [ ];
+  };
+
   # Install firefox.
   programs.firefox.enable = true;
 
