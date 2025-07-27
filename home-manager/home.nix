@@ -68,7 +68,7 @@
   # Config neovim
   programs.neovim = {
     enable = true;
-    viAlias = true;
+    # viAlias = true;
     vimAlias = true;
   };
 
