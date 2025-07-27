@@ -30,6 +30,8 @@
     pkgs.ripgrep
     pkgs.gnumake
     pkgs.gcc
+    pkgs.vlc
+
     # Testing
     pkgs.ungoogled-chromium
 
