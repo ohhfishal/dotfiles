@@ -13,6 +13,7 @@
   home.username = "jg";
   home.homeDirectory = "/home/jg";
 
+  # Use the with syntax here
   home.packages = [
     pkgs.cowsay
     pkgs.lolcat
@@ -29,6 +30,8 @@
     pkgs.ripgrep
     pkgs.gnumake
     pkgs.gcc
+    # Testing
+    pkgs.ungoogled-chromium
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
