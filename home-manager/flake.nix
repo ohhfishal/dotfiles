@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of jg";
+  description = "Home Manager configuration common users";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -20,12 +20,16 @@
       homeConfigurations."jg" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
+        # Specify your home configuration modules
         modules = [ ./home.nix ];
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        # pass extra arguments
+        extraSpecialArgs = {
+          user = {
+            username = "jg";
+            homeDirectory = "/home/jg";
+          };
+        };
       };
     };
 }

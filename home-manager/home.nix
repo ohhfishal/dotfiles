@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -10,8 +10,8 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.username = "jg";
-  home.homeDirectory = "/home/jg";
+  home.username = user.username;
+  home.homeDirectory = user.homeDirectory;
 
   # Use the with syntax here
   home.packages = [
