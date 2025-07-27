@@ -36,7 +36,7 @@
     pkgs.ungoogled-chromium
 
     (pkgs.writeShellScriptBin "switch" ''
-      home-manager switch
+      home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
     '')
   ];
 

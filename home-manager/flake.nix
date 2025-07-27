@@ -17,17 +17,34 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      homeConfigurations."jg" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
+        jg = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-        # Specify your home configuration modules
-        modules = [ ./home.nix ];
+          # Specify your home configuration modules
+          modules = [ ./home.nix ];
 
-        # pass extra arguments
-        extraSpecialArgs = {
-          user = {
-            username = "jg";
-            homeDirectory = "/home/jg";
+          # pass extra arguments
+          extraSpecialArgs = {
+            user = {
+              username = "jg";
+              homeDirectory = "/home/jg";
+            };
+          };
+        };
+
+        ohhfishal = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          # Specify your home configuration modules
+          modules = [ ./home.nix ];
+
+          # pass extra arguments
+          extraSpecialArgs = {
+            user = {
+              username = "ohhfishal";
+              homeDirectory = "/home/ohhfishal";
+            };
           };
         };
       };
