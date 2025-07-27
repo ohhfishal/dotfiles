@@ -95,6 +95,13 @@
     extraGroups = [ ];
   };
 
+  # Create extra groups
+  users.groups = {
+    developer = {
+      members = [ "jg" "ohhfishal" ];
+    };
+  };
+
   # Install firefox.
   programs.firefox.enable = true;
 
