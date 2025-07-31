@@ -71,11 +71,12 @@ vim.o.updatetime = 250
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 
+
 -- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.o.list = true
-vim.opt.listchars = { '» ', trail = '·', nbsp = '␣' }
+-- TODO: Disabled until I find one I like
+vim.o.list = false
+-- vim.opt.listchars = { '» ', trail = '·', nbsp = '␣' }
+
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
