@@ -133,6 +133,22 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Enable ollama - Disabled due to not enough resources
+  # hardware.amdgpu.opencl.enable = true;
+  # hardware.amdgpu.amdvlk.enable = true;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # services.xserver.videoDrivers = [ "amdgpu" ];
+  # hardware.graphics = {
+  #   enable = true;
+  # };
+  #
+  # services.ollama = {
+  #   enable = true;
+  #   loadModels = [ "gemma3n" "gemma3" "phi3"];
+  #   acceleration = "rocm";
+  #   rocmOverrideGfx = "10.3.0";
+  # };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
