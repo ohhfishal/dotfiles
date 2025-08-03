@@ -31,6 +31,7 @@
     pkgs.gnumake
     pkgs.gcc
     pkgs.vlc
+    pkgs.jq
 
     # Testing
     pkgs.ungoogled-chromium
