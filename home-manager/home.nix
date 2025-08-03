@@ -34,6 +34,7 @@
 
     # Testing
     pkgs.ungoogled-chromium
+    pkgs.amdgpu_top
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
