@@ -78,6 +78,7 @@
   # Enable docke
   virtualisation.docker.enable = true;
 
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -133,11 +134,12 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+
   # Enable ollama - Disabled due to not enough resources
-  # hardware.amdgpu.opencl.enable = true;
-  # hardware.amdgpu.amdvlk.enable = true;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.amdgpu.opencl.enable = true;
+  hardware.amdgpu.amdvlk.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  services.xserver.videoDrivers = [ "amdgpu" ];
   # hardware.graphics = {
   #   enable = true;
   # };
