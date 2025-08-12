@@ -32,21 +32,6 @@
             };
           };
         };
-
-        ohhfishal = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          # Specify your home configuration modules
-          modules = [ ./home.nix ];
-
-          # pass extra arguments
-          extraSpecialArgs = {
-            user = {
-              username = "ohhfishal";
-              homeDirectory = "/home/ohhfishal";
-            };
-          };
-        };
       };
     };
 }
