@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./services/adguard.nix
       ./services/forgejo.nix
+      ./services/nextcloud.nix
       ./services/nginx.nix
     ];
 
@@ -26,8 +27,6 @@
       22 # SSH
       53 # AdGuard DNS
       80 # Nginx
-      3000 # AdGuard 
-      3001 # Forgejo 
     ];
     allowedUDPPorts = [ 
       53 # AdGuard DNS

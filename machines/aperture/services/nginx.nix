@@ -26,6 +26,8 @@ in
         locations."/".proxyPass = "http://localhost:${toString forgejo.server.HTTP_PORT}";
       };
 
+      # NOTE: services.nextcloud already used nginx!
+
       # 404 those that don't match
       "_" = {
         default = true;
