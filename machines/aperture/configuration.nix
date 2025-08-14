@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./services/adguard.nix
     ];
 
   # Bootloader.
@@ -18,9 +19,15 @@
   networking.hostName = "aperture"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall = {
-    enabled = true;
-    allowedTCPPorts = [ 22 ];
-  }
+    enable = true;
+    allowedTCPPorts = [
+      22 # SSH
+      53 # AdGuard DNS
+    ];
+    allowedUDPPorts = [ 
+      53 # AdGuard DNS
+    ];
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -28,6 +35,21 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # Disable NetworkManager's internal DNS resolution
+  networking.networkmanager.dns = "none";
+
+  # These options are unnecessary when managing DNS ourselves
+  networking.useDHCP = false;
+  networking.dhcpcd.enable = false;
+
+  # Configure DNS servers manually (this example uses Cloudflare and Google DNS)
+  # IPv6 DNS servers can be used here as well.
+  networking.nameservers = [
+    "8.8.8.8"
+    "1.1.1.1"
+    "8.8.4.4"
+  ];
+
 
   # Set your time zone.
   time.timeZone = "America/Phoenix";
