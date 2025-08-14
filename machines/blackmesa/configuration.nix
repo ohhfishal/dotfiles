@@ -18,33 +18,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8080 80]; # 80 is used by NextCloud
+    allowedTCPPorts = [ 8080 ]; # 80 is used by NextCloud
   };
-
-  # Setup NextCloud
-  environment.etc."nextcloud-admin-pass".text = "defaultpassword123";
-  services.nextcloud = {
-    enable = false;
-    package = pkgs.nextcloud31;
-    hostName = "0.0.0.0";
-    # TODO: database.createLocally = true;
-    config = {
-      adminpassFile = "/etc/nextcloud-admin-pass";
-      dbtype = "sqlite";
-      # TODO: Swap to postgres
-      # dbtype = "pgsql";
-    };
-    settings = {
-      trusted_domains = [ "192.168.0.*" ];
-    };
-    # autoUpdateApps = true;
-    extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
-    };
-    extraAppsEnable = true;
-  };
-
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
