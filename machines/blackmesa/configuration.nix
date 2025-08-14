@@ -24,7 +24,7 @@
   # Setup NextCloud
   environment.etc."nextcloud-admin-pass".text = "defaultpassword123";
   services.nextcloud = {
-    enable = true;
+    enable = false;
     package = pkgs.nextcloud31;
     hostName = "0.0.0.0";
     # TODO: database.createLocally = true;
