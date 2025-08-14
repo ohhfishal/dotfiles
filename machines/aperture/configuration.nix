@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./services/adguard.nix
       ./services/forgejo.nix
+      ./services/nginx.nix
     ];
 
   # Bootloader.

@@ -4,40 +4,6 @@ let
   srv = cfg.settings.server;
 in
 {
-  # TODO: Move somewhere else
-  services.nginx = {
-    enable = true;
-    statusPage = true;
-    virtualHosts = {
-
-      "adguard.barovia.local" = {
-        forceSSL = false;
-        enableACME = false;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
-        locations."/".proxyPass = "http://localhost:3000";
-      };
-
-      ${cfg.settings.server.DOMAIN} = {
-        forceSSL = false;
-        enableACME = false;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
-        locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
-      };
-
-      # 404 those that don't match
-      "_" = {
-        default = true;
-        locations."/" = {
-          return = "404";
-        };
-      };
-    };
-  };
-
   services.forgejo = {
     enable = true;
     database.type = "sqlite3";
