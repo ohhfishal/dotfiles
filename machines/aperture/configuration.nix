@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./services/adguard.nix
+      ./services/forgejo.nix
     ];
 
   # Bootloader.
@@ -23,6 +24,9 @@
     allowedTCPPorts = [
       22 # SSH
       53 # AdGuard DNS
+      80 # Nginx
+      3000 # AdGuard 
+      3001 # Forgejo 
     ];
     allowedUDPPorts = [ 
       53 # AdGuard DNS
