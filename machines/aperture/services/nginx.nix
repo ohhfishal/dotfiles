@@ -11,9 +11,6 @@ in
       "adguard.barovia.local" = {
         forceSSL = false;
         enableACME = false;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
         locations."/".proxyPass = "http://localhost:3000";
       };
 
@@ -24,6 +21,15 @@ in
           client_max_body_size 512M;
         '';
         locations."/".proxyPass = "http://localhost:${toString forgejo.server.HTTP_PORT}";
+      };
+
+      "home.barovia.local" = {
+        forceSSL = false;
+        enableACME = false;
+        locations."/" = {
+          proxyPass = "http://[::1]:8123";
+          proxyWebsockets = true;
+        };
       };
 
       # NOTE: services.nextcloud already used nginx!

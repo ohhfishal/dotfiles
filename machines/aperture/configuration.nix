@@ -11,6 +11,7 @@
       ./services/adguard.nix
       ./services/forgejo.nix
       ./services/nextcloud.nix
+      ./services/homeassistant.nix
       ./services/nginx.nix
     ];
 
