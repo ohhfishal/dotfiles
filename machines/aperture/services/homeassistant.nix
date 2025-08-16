@@ -2,7 +2,7 @@
 
 {
   services.home-assistant = {
-    enable = true;
+    enable = false;
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"

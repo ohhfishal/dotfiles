@@ -7,11 +7,13 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ../common/ca.nix
       ./hardware-configuration.nix
       ./services/adguard.nix
       ./services/forgejo.nix
       ./services/nextcloud.nix
       ./services/homeassistant.nix
+      ./services/vaultwarden.nix
       ./services/nginx.nix
     ];
 
@@ -28,6 +30,7 @@
       22 # SSH
       53 # AdGuard DNS
       80 # Nginx
+      443 # ACME
     ];
     allowedUDPPorts = [ 
       53 # AdGuard DNS
@@ -97,6 +100,7 @@
      pkgs.home-manager
      pkgs.kitty
      pkgs.monocraft
+     pkgs.openssl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

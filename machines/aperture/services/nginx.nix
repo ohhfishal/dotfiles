@@ -1,6 +1,7 @@
 { lib, pkgs, config, ... }:
 let
   forgejo = config.services.forgejo.settings;
+  vaultwarden = config.services.vaultwarden.config;
 in
 {
   services.nginx = {
@@ -21,6 +22,15 @@ in
           client_max_body_size 512M;
         '';
         locations."/".proxyPass = "http://localhost:${toString forgejo.server.HTTP_PORT}";
+      };
+
+      "bitwarden.barovia.local" = {
+        forceSSL = true;
+        enableACME = false;
+        locations."/".proxyPass = "http://localhost:${toString vaultwarden.ROCKET_PORT}";
+        # NOTE: Have to manually add these files from
+        sslCertificate = "/etc/ssl/certs/aperture.crt";
+        sslCertificateKey = "/etc/ssl/private/aperture.key";
       };
 
       "home.barovia.local" = {
