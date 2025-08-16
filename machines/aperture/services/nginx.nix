@@ -4,8 +4,20 @@ let
   vaultwarden = config.services.vaultwarden.config;
 in
 {
-  services.nginx = {
+  services.caddy = {
     enable = true;
+    virtualHosts = {
+      "bitwarden.barovia.local".extraConfig = ''
+        encode zstd gzip
+
+        reverse_proxy :${toString config.services.vaultwarden.config.ROCKET_PORT} {
+            header_up X-Real-IP {remote_host}
+        }
+      '';
+    };
+  };
+  services.nginx = {
+    enable = false;
     statusPage = true;
     virtualHosts = {
 
@@ -22,15 +34,6 @@ in
           client_max_body_size 512M;
         '';
         locations."/".proxyPass = "http://localhost:${toString forgejo.server.HTTP_PORT}";
-      };
-
-      "bitwarden.barovia.local" = {
-        forceSSL = true;
-        enableACME = false;
-        locations."/".proxyPass = "http://localhost:${toString vaultwarden.ROCKET_PORT}";
-        # NOTE: Have to manually add these files from
-        sslCertificate = "/etc/ssl/certs/aperture.crt";
-        sslCertificateKey = "/etc/ssl/private/aperture.key";
       };
 
       "home.barovia.local" = {
