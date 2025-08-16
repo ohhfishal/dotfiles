@@ -7,6 +7,14 @@ in
   services.caddy = {
     enable = true;
     virtualHosts = {
+      "adguard.barovia.local".extraConfig = ''
+        encode zstd gzip
+
+        reverse_proxy :3000 {
+            header_up X-Real-IP {remote_host}
+        }
+      '';
+
       "bitwarden.barovia.local".extraConfig = ''
         encode zstd gzip
 
@@ -14,46 +22,19 @@ in
             header_up X-Real-IP {remote_host}
         }
       '';
-    };
-  };
-  services.nginx = {
-    enable = false;
-    statusPage = true;
-    virtualHosts = {
 
-      "adguard.barovia.local" = {
-        forceSSL = false;
-        enableACME = false;
-        locations."/".proxyPass = "http://localhost:3000";
-      };
+      ${forgejo.server.DOMAIN}.extraConfig = ''
+        encode zstd gzip
 
-      ${forgejo.server.DOMAIN} = {
-        forceSSL = false;
-        enableACME = false;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
-        locations."/".proxyPass = "http://localhost:${toString forgejo.server.HTTP_PORT}";
-      };
+        reverse_proxy :${toString forgejo.server.HTTP_PORT} {
+            header_up X-Real-IP {remote_host}
+        }
+      '';
 
-      "home.barovia.local" = {
-        forceSSL = false;
-        enableACME = false;
-        locations."/" = {
-          proxyPass = "http://[::1]:8123";
-          proxyWebsockets = true;
-        };
-      };
+      # NOTE: services.nextcloud configured to use caddy
 
-      # NOTE: services.nextcloud already used nginx!
+      # TODO: Handle 404's domain
 
-      # 404 those that don't match
-      "_" = {
-        default = true;
-        locations."/" = {
-          return = "404";
-        };
-      };
     };
   };
 }
