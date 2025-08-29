@@ -15,6 +15,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Set envs
+  environment.sessionVariables = {
+    PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
+  };
+
   networking.hostName = "blackmesa"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall = {
@@ -138,6 +143,7 @@
   
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "jg" ];
 
   # Enable ollama - Disabled due to not enough resources
   hardware.amdgpu.opencl.enable = true;

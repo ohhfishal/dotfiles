@@ -32,6 +32,7 @@
     pkgs.gcc
     pkgs.vlc
     pkgs.jq
+    pkgs.devenv
 
     # Testing
     pkgs.ungoogled-chromium
@@ -98,6 +99,7 @@
   # Set envs
   home.sessionVariables = {
     EDITOR = "vim";
+    PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
   };
 
   # Let Home Manager install and manage itself.
