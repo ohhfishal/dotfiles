@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, pkgs-unstable, user, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -20,7 +20,7 @@
 
     # Dev packages
     pkgs.tmux
-    pkgs.go
+    pkgs-unstable.go
     pkgs.rustc
     pkgs.tree
     pkgs.xclip
@@ -33,6 +33,13 @@
     pkgs.vlc
     pkgs.jq
     pkgs.devenv
+    pkgs.python311
+
+    pkgs.obsidian
+    pkgs.godot
+
+    # Mirror my phone
+    pkgs.scrcpy
 
     # Testing
     pkgs.ungoogled-chromium
@@ -94,6 +101,7 @@
     gs = "git status";
     gd = "git diff";
     config = "pushd $HOME/config";
+    notes = "pushd $HOME/notes";
   };
 
   # Set envs

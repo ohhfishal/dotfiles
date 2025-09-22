@@ -24,7 +24,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8080 ]; # 80 is used by NextCloud
+    allowedTCPPorts = [ 8000 ]; # 80 is used by NextCloud
   };
 
   # Configure network proxy if necessary
