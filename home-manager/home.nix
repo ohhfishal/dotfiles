@@ -34,8 +34,8 @@
     pkgs.jq
     pkgs.devenv
     pkgs.python311
+    pkgs.tre-command
 
-    pkgs.obsidian
     pkgs.godot
 
     # Mirror my phone
@@ -44,6 +44,9 @@
     # Testing
     pkgs.ungoogled-chromium
     pkgs.amdgpu_top
+
+    # Unfree packages
+    pkgs.obsidian
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
@@ -102,12 +105,14 @@
     gd = "git diff";
     config = "pushd $HOME/config";
     notes = "pushd $HOME/notes";
+    tree = "$HOME/dev/dirtree/dirtree";
   };
 
   # Set envs
   home.sessionVariables = {
     EDITOR = "vim";
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
+    NOTES = "$HOME/notes";
   };
 
   # Let Home Manager install and manage itself.

@@ -15,6 +15,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Sleep
+  services.logind.extraConfig = ''
+    "IdleAction=hybrid-sleep"
+    "IdleActionSec=30min"
+  '';
+
   # Set envs
   environment.sessionVariables = {
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
@@ -103,26 +109,21 @@
     ];
   };
 
-  users.users.ohhfishal = {
-    isNormalUser = true;
-    description = "ohhfishal";
-    extraGroups = [ ];
-  };
+  # users.users.ohhfishal = {
+  #   isNormalUser = true;
+  #   description = "ohhfishal";
+  #   extraGroups = [ ];
+  # };
 
   # Create extra groups
   users.groups = {
     developer = {
-      members = [ "jg" "ohhfishal" ];
+      members = [ "jg" ];
     };
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
-
-  # Install steam.
   programs.steam.enable = true;
-
-  # Install obs
   programs.obs-studio.enable = true;
 
   # Allow unfree packages
@@ -139,46 +140,32 @@
    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
    git
    wget
+   pkgs.libreoffice
   ];
   
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "jg" ];
 
-  # Enable ollama - Disabled due to not enough resources
-  hardware.amdgpu.opencl.enable = true;
-  hardware.amdgpu.amdvlk.enable = true;
+  # GPU setetings 
+  # hardware.amdgpu.opencl.enable = true;
+  # hardware.amdgpu.amdvlk.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   services.xserver.videoDrivers = [ "amdgpu" ];
   # hardware.graphics = {
   #   enable = true;
   # };
-  #
-  # services.ollama = {
-  #   enable = true;
-  #   loadModels = [ "gemma3n" "gemma3" "phi3"];
-  #   acceleration = "rocm";
-  #   rocmOverrideGfx = "10.3.0";
-  # };
+  hardware = {
+    graphics = {
+        enable = true;
+        enable32Bit = true;
+    };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    amdgpu.amdvlk = {
+        enable = true;
+        support32Bit.enable = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

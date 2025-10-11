@@ -11,11 +11,16 @@
     };
   };
 
-  outputs =
-    { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      unfree = ["obsidian"];
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate = (pkg:
+          builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) unfree
+        );
+      };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
     in
     {
