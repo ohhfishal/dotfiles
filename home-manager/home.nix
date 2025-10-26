@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, user, ... }:
+{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -18,9 +18,11 @@
     pkgs.cowsay
     pkgs.lolcat
 
+    pkgs-unstable.go
+    pkgs-unstable.devenv
+
     # Dev packages
     pkgs.tmux
-    pkgs-unstable.go
     pkgs.rustc
     pkgs.tree
     pkgs.xclip
@@ -32,9 +34,9 @@
     pkgs.gcc
     pkgs.vlc
     pkgs.jq
-    pkgs.devenv
     pkgs.python311
     pkgs.tre-command
+    pkgs.nh
 
     pkgs.godot
 
@@ -47,6 +49,9 @@
 
     # Unfree packages
     pkgs.obsidian
+
+    # Custom packages
+    pkgs-self.dirtree
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
@@ -103,9 +108,11 @@
     g = "git";
     gs = "git status";
     gd = "git diff";
+    gp = "git push";
+    gl = "git log";
     config = "pushd $HOME/config";
     notes = "pushd $HOME/notes";
-    tree = "$HOME/dev/dirtree/dirtree";
+    tree = "dirtree";
   };
 
   # Set envs

@@ -9,9 +9,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Tools I wrote
+    dirtree.url = "github:ohhfishal/dirtree";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, dirtree, ... }:
     let
       system = "x86_64-linux";
       unfree = ["obsidian"];
@@ -22,6 +24,10 @@
         );
       };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+      # Packages I maintain and use
+      pkgs-self = {
+        dirtree = dirtree.packages.${system}.default;
+      };
     in
     {
       homeConfigurations = {
@@ -29,7 +35,9 @@
           inherit pkgs;
 
           # Specify your home configuration modules
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+          ];
 
           # pass extra arguments
           extraSpecialArgs = {
@@ -38,6 +46,7 @@
               homeDirectory = "/home/jg";
             };
             pkgs-unstable = pkgs-unstable;
+            pkgs-self = pkgs-self;
           };
         };
       };
