@@ -11,9 +11,10 @@
     };
     # Tools I wrote
     dirtree.url = "github:ohhfishal/dirtree";
+    gopher.url = "github:ohhfishal/gopher";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, dirtree, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, dirtree, gopher, ... }:
     let
       system = "x86_64-linux";
       unfree = ["obsidian"];
@@ -27,6 +28,7 @@
       # Packages I maintain and use
       pkgs-self = {
         dirtree = dirtree.packages.${system}.default;
+        gopher = gopher.packages.${system}.default;
       };
     in
     {

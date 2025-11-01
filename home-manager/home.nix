@@ -1,6 +1,4 @@
-{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }:
-
-{
+{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }: {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -52,6 +50,14 @@
 
     # Custom packages
     pkgs-self.dirtree
+    pkgs-self.gopher
+
+    (pkgs.writeShellScriptBin "updatepkgs" ''
+      echo updating flake
+      nix flake update --flake ${user.homeDirectory}/config/home-manager
+      echo home-manager switch
+      home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
+    '')
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
