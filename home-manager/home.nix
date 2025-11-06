@@ -11,6 +11,11 @@
   home.username = user.username;
   home.homeDirectory = user.homeDirectory;
 
+  imports = [
+    # Adds programs.zen-browser
+    pkgs-self.zen-browser.homeModules.twilight
+  ];
+
   # Use the with syntax here
   home.packages = [
     pkgs.cowsay
@@ -48,7 +53,7 @@
     # Unfree packages
     pkgs.obsidian
 
-    # Custom packages
+    # Packaged in flake.nix
     pkgs-self.dirtree
     pkgs-self.gopher
 
@@ -106,6 +111,10 @@
   programs.bash = {
     enable = true;
     initExtra = builtins.readFile ./sources/bashrc;
+  };
+
+  programs.zen-browser = {
+    enable = true;
   };
 
   # Set shell agnostic aliases
