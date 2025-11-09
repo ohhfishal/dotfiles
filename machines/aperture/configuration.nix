@@ -30,6 +30,7 @@
       22 # SSH
       53 # AdGuard DNS
       80 # Nginx
+      8080 # Personal
       443 # ACME
     ];
     allowedUDPPorts = [ 
