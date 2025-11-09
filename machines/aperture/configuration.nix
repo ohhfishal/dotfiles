@@ -87,7 +87,7 @@
   users.users.jg = {
     isNormalUser = true;
     description = "jg";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "cdrom"];
     packages = with pkgs; [];
   };
 
