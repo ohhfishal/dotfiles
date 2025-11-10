@@ -15,6 +15,7 @@
       ./services/homeassistant.nix
       ./services/vaultwarden.nix
       ./services/nginx.nix
+      ./services/jellyfin.nix
     ];
 
   # Bootloader.
