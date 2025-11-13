@@ -47,7 +47,6 @@
     pkgs.scrcpy
 
     # Testing
-    pkgs.ungoogled-chromium
     pkgs.amdgpu_top
 
     # Unfree packages
@@ -60,12 +59,12 @@
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake
       nix flake update --flake ${user.homeDirectory}/config/home-manager
-      echo home-manager switch
-      home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
+      cat $(which switch)
+      switch
     '')
 
     (pkgs.writeShellScriptBin "switch" ''
-      home-manager switch --flake ${user.homeDirectory}/.config/home-manager#${user.username}
+      home-manager switch
     '')
   ];
 
@@ -99,6 +98,7 @@
     enable = true;
     # viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
   };
 
   # Config tmux
@@ -117,6 +117,18 @@
     enable = true;
   };
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    profiles.default.extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+      vscodevim.vim
+      yzhang.markdown-all-in-one
+      golang.go
+      ms-python.python
+    ];
+  };
+
   # Set shell agnostic aliases
   home.shellAliases = {
     l = "ls -l";
@@ -132,7 +144,6 @@
 
   # Set envs
   home.sessionVariables = {
-    EDITOR = "vim";
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
     NOTES = "$HOME/notes";
   };

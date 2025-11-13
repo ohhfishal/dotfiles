@@ -11,6 +11,16 @@
       ./hardware-configuration.nix
     ];
 
+  # Use Lix over Nix 
+  nixpkgs.overlays = [ (final: prev: {
+    inherit (prev.lixPackageSets.stable)
+      nixpkgs-review
+      nix-eval-jobs
+      nix-fast-build
+      colmena;
+  }) ];
+  nix.package = pkgs.lixPackageSets.stable.lix;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -18,24 +28,14 @@
   # Sleep
   services.logind.extraConfig = ''
     IdleAction=hybrid-sleep
-    IdleActionSec=60min
+    IdleActionSec=4h
   '';
 
-  # Set envs
-  environment.sessionVariables = {
-    PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
-  };
-
   networking.hostName = "blackmesa"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 8000 ]; # 80 is used by NextCloud
   };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -91,8 +91,8 @@
     #media-session.enable = true;
   };
 
-  # Enable docke
-  virtualisation.docker.enable = true;
+  # Enable docker
+  # virtualisation.docker.enable = true;
 
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -108,12 +108,6 @@
       #  thunderbird
     ];
   };
-
-  # users.users.ohhfishal = {
-  #   isNormalUser = true;
-  #   description = "ohhfishal";
-  #   extraGroups = [ ];
-  # };
 
   # Create extra groups
   users.groups = {
@@ -137,7 +131,7 @@
    pkgs.discord
    pkgs.monocraft
 
-   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+   vim
    git
    wget
    pkgs.libreoffice
@@ -152,9 +146,7 @@
   # hardware.amdgpu.amdvlk.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  # hardware.graphics = {
-  #   enable = true;
-  # };
+
   hardware = {
     graphics = {
         enable = true;
