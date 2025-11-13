@@ -32,7 +32,7 @@
         );
       };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-      # Packages I maintain and use
+      # Things I am packaging via inputs
       pkgs-self = {
         dirtree = dirtree.packages.${system}.default;
         gopher = gopher.packages.${system}.default;

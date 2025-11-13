@@ -91,22 +91,11 @@
     #media-session.enable = true;
   };
 
-  # Enable docker
-  # virtualisation.docker.enable = true;
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jg = {
     isNormalUser = true;
     description = "jg";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      #  thunderbird
-    ];
   };
 
   # Create extra groups
