@@ -87,45 +87,40 @@
     };
   };
 
-programs.starship = {
-  enable = true;
-  settings = {
-    format = "$username@$hostname:$directory$git_branch$git_status$character";
-    
-    username = {
-      show_always = true;
-      format = "[$user]($style)";
-      style_user = "bold green";
-    };
-    
-    hostname = {
-      ssh_only = false;
-      format = "[$hostname]($style)";
-      style = "bold green";
-    };
-    
-    directory = {
-      format = "[$path]($style)";
-      style = "bold blue";
-      truncation_length = 0;
-      truncate_to_repo = false;
-    };
-    
-    git_branch = {
-      format = " [$symbol$branch]($style)";
-      # symbol = " ";  # Git branch icon
-    };
-    
-    git_status = {
-      format = "([$all_status$ahead_behind]($style))";
-    };
-    
-    character = {
-      success_symbol = "[\\$](bold white)";
-      error_symbol = "[\\$](bold red)";
+  programs.starship = {
+    enable = true;
+    settings = {
+      format = "$username$hostname:$directory$git_branch$git_status$character";
+      
+      username = {
+        show_always = true;
+        format = "[$user]($style)";
+        style_user = "bold green";
+      };
+      
+      hostname = {
+        ssh_only = false;
+        format = "[@$hostname]($style)";
+        style = "bold green";
+      };
+      
+      directory = {
+        format = "[$path]($style)";
+        style = "bold blue";
+        truncation_length = 0;
+        truncate_to_repo = false;
+      };
+      
+      git_branch = {
+        format = " [$symbol$branch]($style)";
+      };
+      
+      character = {
+        success_symbol = "[\\$](bold white)";
+        error_symbol = "[\\$](bold red)";
+      };
     };
   };
-};
 
   # Config vim
   programs.vim = {
