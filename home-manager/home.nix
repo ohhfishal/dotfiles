@@ -38,8 +38,8 @@
     pkgs.vlc
     pkgs.jq
     pkgs.python311
-    pkgs.tre-command
     pkgs.nh
+    pkgs.fzf
 
     pkgs.godot
 
@@ -167,8 +167,15 @@
     ];
   };
 
+  # cat replacement
+  programs.bat = {
+    enable = true;
+  };
+
   # Set shell agnostic aliases
   home.shellAliases = {
+    cat = "bat";
+    grep =  "rg";
     l = "ls -l";
     g = "git";
     gs = "git status";
