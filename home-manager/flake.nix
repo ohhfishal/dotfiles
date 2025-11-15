@@ -16,9 +16,6 @@
       # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Tools I wrote
-    dirtree.url = "github:ohhfishal/dirtree";
   };
 
   outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@pkgs-self:
@@ -51,8 +48,6 @@
               homeDirectory = "/home/jg";
             };
             pkgs-unstable = pkgs-unstable;
-            # pkgs-self = pkgs-self;
-            # zen-browser = zen-browser;
           };
         };
       };
