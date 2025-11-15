@@ -18,35 +18,25 @@
 
   # Use the with syntax here
   home.packages = [
-    pkgs.cowsay
-    pkgs.lolcat
-
+    # Dev packages
     pkgs-unstable.go
     pkgs-unstable.devenv
-
-    # Dev packages
     pkgs.tmux
-    pkgs.rustc
     pkgs.tree
     pkgs.xclip
-    pkgs.presenterm
     pkgs.zip
     pkgs.unzip
     pkgs.ripgrep
     pkgs.gnumake
     pkgs.gcc
-    pkgs.vlc
     pkgs.jq
     pkgs.python311
     pkgs.nh
     pkgs.fzf
 
-    pkgs.godot
-
-    # Mirror my phone
+    # General use packages
     pkgs.scrcpy
-
-    # Testing
+    pkgs.vlc
     pkgs.amdgpu_top
 
     # Unfree packages
