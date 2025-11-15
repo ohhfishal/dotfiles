@@ -52,10 +52,6 @@
     # Unfree packages
     pkgs.obsidian
 
-    # Packaged in flake.nix
-    pkgs-self.dirtree
-    pkgs-self.gopher
-
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake
       nix flake update --flake ${user.homeDirectory}/config/home-manager
@@ -184,7 +180,6 @@
     gl = "git log";
     config = "pushd $HOME/config";
     notes = "pushd $HOME/notes";
-    tree = "dirtree";
   };
 
   # Set envs

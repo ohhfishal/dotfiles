@@ -16,12 +16,12 @@
       # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # Tools I wrote
     dirtree.url = "github:ohhfishal/dirtree";
-    gopher.url = "github:ohhfishal/gopher";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, dirtree, gopher, zen-browser, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@pkgs-self:
     let
       system = "x86_64-linux";
       unfree = ["obsidian"];
@@ -32,12 +32,6 @@
         );
       };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-      # Things I am packaging via inputs
-      pkgs-self = {
-        dirtree = dirtree.packages.${system}.default;
-        gopher = gopher.packages.${system}.default;
-        zen-browser = zen-browser;
-      };
     in
     {
       homeConfigurations = {
@@ -51,13 +45,14 @@
 
           # pass extra arguments
           extraSpecialArgs = {
+            inherit pkgs-self;
             user = {
               username = "jg";
               homeDirectory = "/home/jg";
             };
             pkgs-unstable = pkgs-unstable;
-            pkgs-self = pkgs-self;
-            zen-browser = zen-browser;
+            # pkgs-self = pkgs-self;
+            # zen-browser = zen-browser;
           };
         };
       };
