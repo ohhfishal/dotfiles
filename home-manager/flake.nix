@@ -16,6 +16,7 @@
       # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gopher.url = "github:ohhfishal/gopher";
   };
 
   outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@pkgs-self:
@@ -29,6 +30,8 @@
         );
       };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+      # gopher = (builtins.getFlake pkgs-self.gopher.url).packages.${system}.default;
+      gopher = pkgs-self.gopher.packages.${system}.default;
     in
     {
       homeConfigurations = {
@@ -48,6 +51,7 @@
               homeDirectory = "/home/jg";
             };
             pkgs-unstable = pkgs-unstable;
+            gopher = gopher;
           };
         };
       };

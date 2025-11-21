@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }: {
+{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }@inputs: {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -42,6 +42,8 @@
     # Unfree packages
     pkgs.obsidian
 
+    inputs.gopher
+
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake
       nix flake update --flake ${user.homeDirectory}/config/home-manager
@@ -70,41 +72,6 @@
     };
     ".gitconfig" = {
       source = ./sources/gitconfig;
-    };
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      format = "$username$hostname:$directory$git_branch$git_status$character";
-      
-      username = {
-        show_always = true;
-        format = "[$user]($style)";
-        style_user = "bold green";
-      };
-      
-      hostname = {
-        ssh_only = false;
-        format = "[@$hostname]($style)";
-        style = "bold green";
-      };
-      
-      directory = {
-        format = "[$path]($style)";
-        style = "bold blue";
-        truncation_length = 0;
-        truncate_to_repo = false;
-      };
-      
-      git_branch = {
-        format = " [$symbol$branch]($style)";
-      };
-      
-      character = {
-        success_symbol = "[\\$](bold white)";
-        error_symbol = "[\\$](bold red)";
-      };
     };
   };
 
@@ -150,6 +117,7 @@
       yzhang.markdown-all-in-one
       golang.go
       ms-python.python
+      redhat.vscode-yaml
     ];
   };
 
