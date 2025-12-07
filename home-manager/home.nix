@@ -43,6 +43,7 @@
     pkgs.obsidian
 
     inputs.gopher
+    inputs.fishy
 
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake

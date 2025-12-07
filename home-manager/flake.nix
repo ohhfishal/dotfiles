@@ -32,6 +32,17 @@
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
       # gopher = (builtins.getFlake pkgs-self.gopher.url).packages.${system}.default;
       gopher = pkgs-self.gopher.packages.${system}.default;
+
+      fishySrc = pkgs.fetchFromGitHub {
+        owner = "ohhfishal";
+        repo = "fishy";
+        rev = "v0.2.1";
+        sha256 = "sha256-M6UXC0fIRNsLsX0beChrUIgiCqNbjq/BAcxlfrcnhqs=";
+      };
+      fishy = pkgs.callPackage(fishySrc + "/package.nix") {
+        src = fishySrc;
+        version = fishySrc.rev;
+      };
     in
     {
       homeConfigurations = {
@@ -45,13 +56,14 @@
 
           # pass extra arguments
           extraSpecialArgs = {
-            inherit pkgs-self;
             user = {
               username = "jg";
               homeDirectory = "/home/jg";
             };
-            pkgs-unstable = pkgs-unstable;
-            gopher = gopher;
+            inherit pkgs-unstable;
+            inherit pkgs-self;
+            inherit gopher;
+            fishy = fishy.fishy;
           };
         };
       };

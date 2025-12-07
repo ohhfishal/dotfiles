@@ -11,25 +11,15 @@
       ./hardware-configuration.nix
     ];
 
-  # Use Lix over Nix 
-  nixpkgs.overlays = [ (final: prev: {
-    inherit (prev.lixPackageSets.stable)
-      nixpkgs-review
-      nix-eval-jobs
-      nix-fast-build
-      colmena;
-  }) ];
-  nix.package = pkgs.lixPackageSets.stable.lix;
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Sleep
-  services.logind.extraConfig = ''
-    IdleAction=hybrid-sleep
-    IdleActionSec=4h
-  '';
+  # services.logind.settings.Login = {
+  #   IdleAction="hybrid-sleep";
+  #   IdleActionSec="4h";
+  # };
 
   networking.hostName = "blackmesa"; # Define your hostname.
   networking.firewall = {
@@ -130,9 +120,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "jg" ];
 
-  # GPU setetings 
-  # hardware.amdgpu.opencl.enable = true;
-  # hardware.amdgpu.amdvlk.enable = true;
+  # GPU settings 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -141,11 +129,18 @@
         enable = true;
         enable32Bit = true;
     };
+  };
 
-    amdgpu.amdvlk = {
-        enable = true;
-        support32Bit.enable = true;
-    };
+  # Automaticaly upgrade NixOS
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+  };
+
+  # Weekly cleanup nix store
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
   };
 
   # This value determines the NixOS release from which the default
