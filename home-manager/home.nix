@@ -42,9 +42,13 @@
     # Unfree packages
     pkgs.obsidian
 
-    inputs.gopher
+    # inputs.gopher
     inputs.fishy
 
+
+    (pkgs.writeShellScriptBin "gopher" ''
+      $HOME/dev/gopher/gopher "$@"
+    '')
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake
       nix flake update --flake ${user.homeDirectory}/config/home-manager
@@ -54,6 +58,9 @@
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
+    '')
+    (pkgs.writeShellScriptBin "todo" ''
+      rg "\/\/ TODO:.*" --trim
     '')
   ];
 
