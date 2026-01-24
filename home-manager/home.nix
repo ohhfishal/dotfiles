@@ -134,6 +134,12 @@
     enable = true;
   };
 
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
+
   # Set shell agnostic aliases
   home.shellAliases = {
     cat = "bat";
