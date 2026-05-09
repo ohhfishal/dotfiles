@@ -1,20 +1,13 @@
 { config, pkgs, pkgs-unstable, user, pkgs-self, ... }@inputs: {
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
-  home.username = user.username;
-  home.homeDirectory = user.homeDirectory;
-
   imports = [
     # Adds programs.zen-browser
     pkgs-self.zen-browser.homeModules.twilight
   ];
+
+  programs.zen-browser = {
+    enable = true;
+  };
+
 
   # Use the with syntax here
   home.packages = [
@@ -34,6 +27,10 @@
     pkgs.nh
     pkgs.fzf
 
+    pkgs.starship
+    pkgs.jujutsu
+    pkgs.lazyjj
+
     # General use packages
     pkgs.scrcpy
     pkgs.vlc
@@ -42,13 +39,6 @@
     # Unfree packages
     pkgs.obsidian
 
-    # inputs.gopher
-    inputs.fishy
-
-
-    (pkgs.writeShellScriptBin "gopher" ''
-      $HOME/dev/gopher/gopher "$@"
-    '')
     (pkgs.writeShellScriptBin "updatepkgs" ''
       echo updating flake
       nix flake update --flake ${user.homeDirectory}/config/home-manager
@@ -58,9 +48,6 @@
 
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
-    '')
-    (pkgs.writeShellScriptBin "todo" ''
-      rg "\/\/ TODO:.*" --trim
     '')
   ];
 
@@ -83,50 +70,29 @@
     };
   };
 
-  # Config vim
   programs.vim = {
     enable = true;
     extraConfig = builtins.readFile ./sources/vimrc;
   };
 
-  # Config neovim
   programs.neovim = {
     enable = true;
-    # viAlias = true;
+    viAlias = true;
     vimAlias = true;
     defaultEditor = true;
   };
 
-  # Config tmux
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./sources/tmux.conf;
   };
 
-  # Config Bash
   programs.bash = {
     enable = true;
     enableCompletion = true;
     initExtra = builtins.readFile ./sources/bashrc + ''
 
     '';
-  };
-
-  programs.zen-browser = {
-    enable = true;
-  };
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    profiles.default.extensions = with pkgs.vscode-extensions; [
-      dracula-theme.theme-dracula
-      vscodevim.vim
-      yzhang.markdown-all-in-one
-      golang.go
-      ms-python.python
-      redhat.vscode-yaml
-    ];
   };
 
   # cat replacement
@@ -140,12 +106,21 @@
     enableZshIntegration = true;
   };
 
-  # Set shell agnostic aliases
+  programs.starship = {
+    enable = true;
+  };
+
   home.shellAliases = {
     cat = "bat";
     grep =  "rg";
     l = "ls -l";
     g = "git";
+    j = "jj";
+    jd = "j diff";
+    jl = "j log";
+    jc = "j commit";
+    jb = "j b";
+    jba = " j b a";
     gs = "git status";
     gd = "git diff";
     gp = "git push";
@@ -154,13 +129,23 @@
     notes = "pushd $HOME/notes";
   };
 
-  # Set envs
   home.sessionVariables = {
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
     NOTES = "$HOME/notes";
     NIX_SHELL_PRESERVE_PROMPT = 1;
   };
 
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  home.username = user.username;
+  home.homeDirectory = user.homeDirectory;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
