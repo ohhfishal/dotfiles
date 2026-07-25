@@ -46,6 +46,11 @@
       switch
     '')
 
+    # Mirror Android devices to record them
+    (pkgs.writeShellScriptBin "mirror" ''
+      scrcpy -w -t 
+    '')
+
     (pkgs.writeShellScriptBin "switch" ''
       home-manager switch
     '')
@@ -79,6 +84,8 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+    withRuby = true;
+    withPython3 = true;
     defaultEditor = true;
   };
 
@@ -112,6 +119,7 @@
 
   home.shellAliases = {
     cat = "bat";
+    less = "bat";
     grep =  "rg";
     l = "ls -l";
     g = "git";
@@ -119,6 +127,8 @@
     jd = "j diff";
     jl = "j log";
     jc = "j commit";
+    js = "j status";
+    jp = "j git push";
     jb = "j b";
     jba = " j b a";
     gs = "git status";
@@ -127,6 +137,7 @@
     gl = "git log";
     config = "pushd $HOME/config";
     notes = "pushd $HOME/notes";
+    v = "nvim";
   };
 
   home.sessionVariables = {

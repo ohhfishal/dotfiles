@@ -15,13 +15,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Sleep
-  # services.logind.settings.Login = {
-  #   IdleAction="hybrid-sleep";
-  #   IdleActionSec="4h";
-  # };
-
-  networking.hostName = "blackmesa"; # Define your hostname.
+  networking.hostName = "blackmesa";
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 8000 ]; # 80 is used by NextCloud
