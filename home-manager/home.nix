@@ -100,7 +100,7 @@
     colors = "auto";
     git = true;
     icons = "auto";
-    theme = builtins.readFile  sources/eza-themes/dracula.yaml;
+    theme = builtins.readFile  themes/eza/one_dark.yaml;
   };
 
   programs.fzf = {
