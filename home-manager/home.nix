@@ -25,6 +25,7 @@
     pkgs.jq
     pkgs.python311
     pkgs.fzf
+    pkgs.fastfetch
 
     pkgs.starship
     pkgs.jujutsu
