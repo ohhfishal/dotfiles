@@ -66,8 +66,11 @@
       recursive = true;
     };
     ".config/nvim/colors" = {
-      source = ./sources/nvim/colors;
+      source = ./themes/vim;
       recursive = true;
+    };
+    ".config/eza/theme.yaml" = {
+      source = ./themes/eza/one_dark.yaml;
     };
     ".gitconfig" = {
       source = ./sources/gitconfig;

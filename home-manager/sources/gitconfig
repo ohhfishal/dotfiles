@@ -3,3 +3,5 @@
 [user]
 	name = ohhfishal
 	email = ohhfishal@gmail.com
+[core]
+  pager = bat --style plain

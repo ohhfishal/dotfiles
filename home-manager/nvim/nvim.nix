@@ -24,7 +24,33 @@ in
   };
 
   plugins.lualine.enable = true;
-  plugins.blink-cmp.enable = true;
+  plugins.telescope = {
+    enable = true;
+    keymaps = {
+      "<leader>ff" = {
+        action = "find_files";
+        options = {
+          desc = "Telescope find files";
+        };
+      };
+      "<leader>fg" = "live_grep";
+      "<leader>fb" = "buffers";
+      "<leader>fh" = "help_tags";
+    };
+  };
+  plugins.blink-cmp = {
+    enable = true;
+    settings = {
+      keymap = {
+        preset = "enter";
+      };
+      cmdline = {
+        keymap = {
+          preset = "inherit";
+        };
+      };
+    };
+  };
   # plugins.blink-cmp-git.enable = true;
   plugins.gitgutter.enable = true;
   plugins.neo-tree = {
