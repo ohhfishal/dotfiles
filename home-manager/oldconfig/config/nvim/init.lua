@@ -148,6 +148,7 @@ keymap("n", "<Leader>q", ":q<CR>", opts)
 keymap("n", "<Leader>e", ":e ", { noremap = true })
 keymap("n", "<Leader>rc", ":e $MYVIMRC<CR>", opts)
 keymap("n", "<Leader>r", ":!\"%:p\"<CR>", opts)
+keymap("n", "<Leader>D", ":put =strftime('%m/%d/%y')<CR>", opts)
 
 -- Buffer operations
 keymap("n", "gb", ":ls<CR>:buffer ", { noremap = true })

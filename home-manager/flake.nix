@@ -5,6 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +20,7 @@
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@pkgs-self:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, zen-browser, nixvim, ... }:
     let
       system = "x86_64-linux";
       unfree = ["obsidian"];
@@ -46,7 +47,8 @@
               homeDirectory = "/home/jg";
             };
             inherit pkgs-unstable;
-            inherit pkgs-self;
+            inherit zen-browser;
+            inherit nixvim;
           };
         };
       };

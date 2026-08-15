@@ -1,13 +1,13 @@
-{ config, pkgs, pkgs-unstable, user, pkgs-self, ... }@inputs: {
+{ config, pkgs, pkgs-unstable, user,  ... }@inputs: {
   imports = [
-    # Adds programs.zen-browser
-    pkgs-self.zen-browser.homeModules.twilight
+    inputs.zen-browser.homeModules.twilight
+    inputs.nixvim.homeModules.nixvim
   ];
 
   programs.zen-browser = {
     enable = true;
   };
-
+  programs.nixvim.imports = [ ./nvim/nvim.nix ];
 
   # Use the with syntax here
   home.packages = [
@@ -24,7 +24,6 @@
     pkgs.gcc
     pkgs.jq
     pkgs.python311
-    pkgs.nh
     pkgs.fzf
 
     pkgs.starship
@@ -46,6 +45,10 @@
       switch
     '')
 
+    (pkgs.writeShellScriptBin "updateos" ''
+      nixos-rebuild switch
+    '')
+
     # Mirror Android devices to record them
     (pkgs.writeShellScriptBin "mirror" ''
       scrcpy -w -t 
@@ -58,16 +61,12 @@
 
   # Link config files to the right place
   home.file = {
-    ".vim" = {
-      source = ./sources/vim;
-      recursive = true;
-    };
     ".config" = {
       source = ./sources/config;
       recursive = true;
     };
     ".config/nvim/colors" = {
-      source = ./sources/vim/colors;
+      source = ./sources/nvim/colors;
       recursive = true;
     };
     ".gitconfig" = {
@@ -75,19 +74,6 @@
     };
   };
 
-  programs.vim = {
-    enable = true;
-    extraConfig = builtins.readFile ./sources/vimrc;
-  };
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    withRuby = true;
-    withPython3 = true;
-    defaultEditor = true;
-  };
 
   programs.tmux = {
     enable = true;
@@ -107,6 +93,16 @@
     enable = true;
   };
 
+  programs.eza = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    colors = "auto";
+    git = true;
+    icons = "auto";
+    theme = builtins.readFile  sources/eza-themes/dracula.yaml;
+  };
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
@@ -120,8 +116,11 @@
   home.shellAliases = {
     cat = "bat";
     less = "bat";
+    ls = "eza";
     grep =  "rg";
-    l = "ls -l";
+    tree = "eza --tree";
+    t = "tree";
+    l = "eza -l";
     g = "git";
     j = "jj";
     jd = "j diff";
@@ -137,6 +136,8 @@
     gl = "git log";
     config = "pushd $HOME/config";
     notes = "pushd $HOME/notes";
+    x = "exit";
+    c = "clear";
     v = "nvim";
   };
 
