@@ -80,6 +80,7 @@
     isNormalUser = true;
     description = "jg";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
+    shell = pkgs.zsh;
   };
 
   # Create extra groups
@@ -90,6 +91,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.zsh.enable = true;
   programs.steam.enable = true;
   programs.obs-studio.enable = true;
 

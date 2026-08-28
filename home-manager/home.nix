@@ -29,7 +29,7 @@
 
     pkgs.starship
     pkgs.jujutsu
-    pkgs.lazyjj
+    # pkgs.lazyjj
 
     # General use packages
     pkgs.scrcpy
@@ -62,10 +62,6 @@
 
   # Link config files to the right place
   home.file = {
-    ".config" = {
-      source = ./sources/config;
-      recursive = true;
-    };
     ".config/nvim/colors" = {
       source = ./themes/vim;
       recursive = true;
@@ -81,12 +77,51 @@
 
   programs.tmux = {
     enable = true;
-    extraConfig = builtins.readFile ./sources/tmux.conf;
+    shell = "${pkgs.zsh}/bin/zsh";
+    prefix = "C-a";
+    terminal = "screen-256color";
+    keyMode =  "vi";
+    mouse = true;
+    disableConfirmationPrompt = true;
+    extraConfig = ''
+      # Start of programs.tmux.extraConfig
+      bind-key | split-window -h
+      bind-key - split-window -v
+
+      set-option -sg escape-time 10
+      set -g lock-after-time 0
+      set -g renumber-windows on
+
+      set -g status-bg colour247
+      set -g window-status-current-style bg=colour239,fg=white
+      set -g remain-on-exit off
+
+      bind-key h select-pane -L
+      bind-key k select-pane -U
+      bind-key j select-pane -D
+      bind-key l select-pane -R
+    '';
   };
 
   programs.bash = {
     enable = true;
     enableCompletion = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    initContent = ''
+      bindkey -v
+    '';
+   
+    # oh-my-zsh = {
+    #   enable = true;
+    #   plugins = [
+    #     "git"         # also requires `programs.git.enable = true;`
+    #   ];
+    #   theme = "robbyrussell";
+    # };
   };
 
   # cat replacement
@@ -115,6 +150,10 @@
   };
 
   home.shellAliases = {
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    "....." = "cd ../../../..";
     cat = "bat";
     less = "bat";
     ls = "eza";
