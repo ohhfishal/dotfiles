@@ -87,9 +87,6 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    initExtra = builtins.readFile ./sources/bashrc + ''
-
-    '';
   };
 
   # cat replacement
@@ -146,9 +143,11 @@
   };
 
   home.sessionVariables = {
+    FOO = "BAR";
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
     NOTES = "$HOME/notes";
     NIX_SHELL_PRESERVE_PROMPT = 1;
+    MANPAGER = "bat -plman";
   };
 
   # This value determines the Home Manager release that your configuration is
