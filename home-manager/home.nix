@@ -28,7 +28,6 @@
     pkgs.fastfetch
 
     pkgs.starship
-    pkgs.jujutsu
     # pkgs.lazyjj
 
     # General use packages
@@ -69,11 +68,33 @@
     ".config/eza/theme.yaml" = {
       source = ./themes/eza/one_dark.yaml;
     };
-    ".gitconfig" = {
-      source = ./sources/gitconfig;
+  };
+
+  programs.git = {
+    enable = true;
+    settings = {
+      init = {
+        defaultbranch = "main";
+      };
+      user = {
+        name = "ohhfishal";
+        email = "ohhfishal@gmail.com";
+      };
     };
   };
 
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      init = {
+        defaultbranch = "main";
+      };
+      user = {
+        name = "ohhfishal";
+        email = "ohhfishal@gmail.com";
+      };
+    };
+  };
 
   programs.tmux = {
     enable = true;
@@ -124,7 +145,6 @@
     # };
   };
 
-  # cat replacement
   programs.bat = {
     enable = true;
   };
@@ -147,6 +167,12 @@
 
   programs.starship = {
     enable = true;
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    enableJujutsuIntegration = true;
   };
 
   home.shellAliases = {

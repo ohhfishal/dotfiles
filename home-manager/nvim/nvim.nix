@@ -1,4 +1,4 @@
-{lib, ...}:
+{pkgs, lib, ...}:
 let
   options = {
     noremap = true;
@@ -21,6 +21,14 @@ in
   globals = {
     mapleader = " ";
     maplocalleader = " ";
+  };
+
+  plugins.lsp = {
+    enable = true;
+    autoLoad = true;
+    servers.basedpyright = {
+      enable = true;
+    };
   };
 
   plugins.lualine.enable = true;
