@@ -26,9 +26,8 @@ in
   plugins.lsp = {
     enable = true;
     autoLoad = true;
-    servers.basedpyright = {
-      enable = true;
-    };
+    servers.basedpyright.enable = true;
+    servers.nixd.enable = true;
   };
 
   plugins.lualine.enable = true;

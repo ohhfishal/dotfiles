@@ -211,6 +211,7 @@
     FOO = "BAR";
     PYTHONPYCACHEPREFIX = "$HOME/.cache/python";
     NOTES = "$HOME/notes";
+    DOCUMENTS = "$HOME/Documents";
     NIX_SHELL_PRESERVE_PROMPT = 1;
     MANPAGER = "bat -plman";
   };
