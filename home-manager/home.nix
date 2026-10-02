@@ -200,11 +200,12 @@
     gd = "git diff";
     gp = "git push";
     gl = "git log";
-    config = "pushd $HOME/config";
-    notes = "pushd $HOME/notes";
     x = "exit";
     c = "clear";
     v = "nvim";
+    config = "cd $HOME/config";
+    notes = "cd $NOTES";
+    documents = "cd $DOCUMENTS";
   };
 
   home.sessionVariables = {
