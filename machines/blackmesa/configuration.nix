@@ -120,6 +120,8 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # virtualisation.podman.enable = true;
+
   hardware = {
     graphics = {
         enable = true;
